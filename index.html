@@ -1,100 +1,109 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <title>Zorrito IA</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f5f5f5;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-    .chat {
-      background: white;
-      width: 100%;
-      max-width: 400px;
-      border-radius: 10px;
-      padding: 15px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-    h2 {
-      text-align: center;
-      margin-bottom: 10px;
-    }
-    #respuesta {
-      min-height: 100px;
-      border: 1px solid #ddd;
-      padding: 10px;
-      margin-bottom: 10px;
-      overflow-y: auto;
-      white-space: pre-wrap;
-    }
-    input {
-      width: 100%;
-      padding: 8px;
-      box-sizing: border-box;
-      margin-bottom: 8px;
-    }
-    button {
-      width: 100%;
-      padding: 10px;
-      background: orange;
-      border: none;
-      color: white;
-      font-size: 16px;
-      border-radius: 5px;
-      cursor: pointer;
-    }
-  </style>
-</head>
-<body>
-
-<div class="chat">
-  <h2>🦊 Zorrito IA</h2>
-
-  <div id="respuesta">Zorrito listo para hablar…</div>
-
-  <input id="msg" type="text" placeholder="Escribe tu mensaje" />
-  <button onclick="enviar()">Enviar</button>
-</div>
-
-<script>
-function enviar() {
-  const texto = document.getElementById("msg").value;
-  document.getElementById("msg").value = "";
-
+<!DOCTYPE html><font></font>
+<html lang="es"><font></font>
+<head><font></font>
+  <meta charset="UTF-8"><font></font>
+  <title>Zorrito IA</title><font></font>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"><font></font>
+  <style><font></font>
+    body {<font></font>
+      font-family: Arial, sans-serif;<font></font>
+      background: #f5f5f5;<font></font>
+      display: flex;<font></font>
+      justify-content: center;<font></font>
+      align-items: center;<font></font>
+      height: 100vh;<font></font>
+    }<font></font>
+    .chat {<font></font>
+      background: white;<font></font>
+      width: 100%;<font></font>
+      max-width: 400px;<font></font>
+      border-radius: 10px;<font></font>
+      padding: 15px;<font></font>
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);<font></font>
+    }<font></font>
+    h2 {<font></font>
+      text-align: center;<font></font>
+      margin-bottom: 10px;<font></font>
+    }<font></font>
+    #respuesta {<font></font>
+      min-height: 100px;<font></font>
+      border: 1px solid #ddd;<font></font>
+      padding: 10px;<font></font>
+      margin-bottom: 10px;<font></font>
+      overflow-y: auto;<font></font>
+      white-space: pre-wrap;<font></font>
+    }<font></font>
+    input {<font></font>
+      width: 100%;<font></font>
+      padding: 8px;<font></font>
+      box-sizing: border-box;<font></font>
+      margin-bottom: 8px;<font></font>
+    }<font></font>
+    button {<font></font>
+      width: 100%;<font></font>
+      padding: 10px;<font></font>
+      background: orange;<font></font>
+      border: none;<font></font>
+      color: white;<font></font>
+      font-size: 16px;<font></font>
+      border-radius: 5px;<font></font>
+      cursor: pointer;<font></font>
+    }<font></font>
+  </style><font></font>
+</head><font></font>
+<body><font></font>
+<font></font>
+<div class="chat"><font></font>
+  <h2>🦊 Zorrito IA</h2><font></font>
+<font></font>
+  <div id="respuesta">Zorrito listo para hablar…</div><font></font>
+<font></font>
+  <input id="msg" type="text" placeholder="Escribe tu mensaje" /><font></font>
+  <button onclick="enviar()">Enviar</button><font></font>
+</div><font></font>
+<font></font>
+<script><font></font>
+function enviar() {<font></font>
+  const texto = document.getElementById("msg").value;<font></font>
+  document.getElementById("msg").value = "";<font></font>
+<font></font>
   fetch("https://adlersolis.app.n8n.cloud/webhook/744d28b0-4547-4ac4-be77-b0e68f12077a", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      mensaje: texto,
-      sessionId: "chat-fijo"
-    })
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    mensaje: texto,
+    sessionId: "chat-fijo"
   })
-  .then(res => res.text())
-  .then(textoRespuesta => {
-    let data;
-    try {
-      data = JSON.parse(textoRespuesta);
-      document.getElementById("respuesta").textContent =
-        data.respuesta || textoRespuesta;
-    } catch {
-      document.getElementById("respuesta").textContent = textoRespuesta;
-    }
-  })
-  .catch(err => {
-    document.getElementById("respuesta").textContent =
-      "Error al conectar con Zorrito IA";
-    console.error(err);
-  });
-}
-</script>
-
-</body>
+})
+.then(r => r.text())
+.then(t => respuesta.innerText = t);", {<font></font>
+    method: "POST",<font></font>
+    headers: {<font></font>
+      "Content-Type": "application/json"<font></font>
+    },<font></font>
+    body: JSON.stringify({<font></font>
+      mensaje: texto,<font></font>
+      sessionId: "chat-fijo"<font></font>
+    })<font></font>
+  })<font></font>
+  .then(res => res.text())<font></font>
+  .then(textoRespuesta => {<font></font>
+    let data;<font></font>
+    try {<font></font>
+      data = JSON.parse(textoRespuesta);<font></font>
+      document.getElementById("respuesta").textContent =<font></font>
+        data.respuesta || textoRespuesta;<font></font>
+    } catch {<font></font>
+      document.getElementById("respuesta").textContent = textoRespuesta;<font></font>
+    }<font></font>
+  })<font></font>
+  .catch(err => {<font></font>
+    document.getElementById("respuesta").textContent =<font></font>
+      "Error al conectar con Zorrito IA";<font></font>
+    console.error(err);<font></font>
+  });<font></font>
+}<font></font>
+</script><font></font>
+<font></font>
+</body><font></font>
 </html>
