@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Zorrito IA</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .chat {
+      background: white;
+      width: 100%;
+      max-width: 400px;
+      border-radius: 10px;
+      padding: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+    #respuesta {
+      min-height: 100px;
+      border: 1px solid #ddd;
+      padding: 10px;
+      margin-bottom: 10px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+    }
+    input {
+      width: 100%;
+      padding: 8px;
+      box-sizing: border-box;
+      margin-bottom: 8px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background: orange;
+      border: none;
+      color: white;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<div class="chat">
+  <h2>🦊 Zorrito IA</h2>
+
+  <div id="respuesta">Zorrito listo para hablar…</div>
+
+  <input id="msg" type="text" placeholder="Escribe tu mensaje" />
+  <button onclick="enviar()">Enviar</button>
+</div>
+
+<script>
+function enviar() {
+  const texto = document.getElementById("msg").value;
+  document.getElementById("msg").value = "";
+
+  fetch("https://adlersolis.app.n8n.cloud/webhook/744d28b0-4547-4ac4-be77-b0e68f12077a", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      mensaje: texto,
+      sessionId: "chat-fijo"
+    })
+  })
+  .then(res => res.text())
+  .then(textoRespuesta => {
+    let data;
+    try {
+      data = JSON.parse(textoRespuesta);
+      document.getElementById("respuesta").textContent =
+        data.respuesta || textoRespuesta;
+    } catch {
+      document.getElementById("respuesta").textContent = textoRespuesta;
+    }
+  })
+  .catch(err => {
+    document.getElementById("respuesta").textContent =
+      "Error al conectar con Zorrito IA";
+    console.error(err);
+  });
+}
+</script>
+
+</body>
+</html>
