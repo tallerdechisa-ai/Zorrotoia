@@ -3,73 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <title>Zorrito</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #111;
-      color: #fff;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-    }
-    .chat {
-      width: 100%;
-      max-width: 400px;
-      background: #1c1c1c;
-      padding: 15px;
-      border-radius: 10px;
-    }
-    input, button {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      border-radius: 5px;
-      border: none;
-    }
-    button {
-      background: #ff7a18;
-      color: #000;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    #respuesta {
-      margin-top: 15px;
-      white-space: pre-wrap;
-    }
-  </style>
 </head>
 <body>
 
-<div class="chat">
-  <h3>🦊 Zorrito</h3>
-  <input id="msg" placeholder="Escribe algo..." />
-  <button onclick="enviar()">Enviar</button>
-  <div id="respuesta"></div>
-</div>
+<h2>🦊 Zorrito</h2>
+
+<input id="msg" placeholder="Escribe algo" />
+<button onclick="enviar()">Enviar</button>
+
+<div id="respuesta"></div>
 
 <script>
 function enviar() {
   const texto = document.getElementById("msg").value;
-  const out = document.getElementById("respuesta");
 
-  out.textContent = "Pensando...";
-
-  fetch("https://adlersolis.app.n8n.cloud/webhook/ecebf650-a450-4290-b837-421b33ec5956/chat", {
+  fetch("https://adlersolis.app.n8n.cloud/webhook/744d28b0-4547-4ac4-be77-b0e68f12077a/chat", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      mensaje: texto
+      mensaje: texto,
+      sessionId: "chat-fijo"
     })
   })
-  .then(r => r.json())
-  .then(d => {
-    out.textContent = d.respuesta || "Sin respuesta";
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById("respuesta").textContent =
+      data.respuesta || "Sin respuesta";
   })
   .catch(err => {
-    out.textContent = "Error al conectar";
+    document.getElementById("respuesta").textContent = "Error al conectar";
     console.error(err);
   });
 }
